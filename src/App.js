@@ -21,6 +21,7 @@ db = process.env == 'prod' ? prodDB : devDB;
 fork, git clone, make changes, git add, git commit, git push, pull request
 - all of these have flags that modify behavior
 
+- i made some changes to test pulling a remote repo
 
 */ 
 
