@@ -1,7 +1,28 @@
 import logo from './logo.svg';
 import './App.css';
 
+/* ***** TODO ***** */
+/* 
+- get User data, get Matches
+  - proccess and pass into child components
+
+- figure out conditional DB config
+
+- set up MaterialUI
+
+- profile display action
+
+- db connection and commands... how to?
+
+NOTES:
+
+db = process.env == 'prod' ? prodDB : devDB;
+
+*/ 
+
+
 function App() {
+
   return (
     <div className="App">
       <header className="App-header">
