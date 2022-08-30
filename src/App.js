@@ -18,7 +18,9 @@ NOTES:
 
 db = process.env == 'prod' ? prodDB : devDB;
 
-fork, git clone, make changes, git add, git commit, git push
+fork, git clone, make changes, git add, git commit, git push, pull request
+- all of these have flags that modify behavior
+
 
 */ 
 
