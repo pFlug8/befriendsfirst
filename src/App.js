@@ -18,6 +18,8 @@ NOTES:
 
 db = process.env == 'prod' ? prodDB : devDB;
 
+fork, git clone, make changes, git add, git commit, git push
+
 */ 
 
 
