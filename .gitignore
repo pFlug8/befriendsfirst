@@ -21,3 +21,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# development server
+
+/dev_server/node_modules
+/dev_server/config.env
