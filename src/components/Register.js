@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { fillForm } from '../util';
 // import { useNavigate } from 'react-router';
 
 const Register = (props) => {
@@ -144,6 +145,7 @@ const Register = (props) => {
                 </fieldset>
                 <button type='submit'>Register</button>
             </form>
+            <button onClick={fillForm}>Fill</button>
         </div>
     )
 }
