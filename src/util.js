@@ -12,12 +12,25 @@ export const fillForm = () => {
         // jam: 
     }
 
-    document.getElementById('name').value = data.name;
+    // need this workaround to manually trigger events on elements in React. source: https://stackoverflow.com/questions/23892547/what-is-the-best-way-to-trigger-onchange-event-in-react-js
+    const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
+    const nativeTextAreaValueSetter = Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype, 'value').set;
+
+    const name = document.getElementById('name');
+    //name.value = data.name;
+    nativeInputValueSetter.call(name, 'Donna Boone');
+    const event = new Event('change');
+    name.dispatchEvent(event);
+
     document.getElementById('passwd').value = data.passwd;
     document.getElementById('cnfrm_passwd').value = data.passwd;
-    document.getElementById('email').value = data.email;
-    document.getElementById('zip').value = data.zip;
 
+    const email = document.getElementById('email');
+    email.value = data.email;
+console.log(event)
+    email.dispatchEvent(event);
+console.log('event dispatched')
+    document.getElementById('zip').value = data.zip;
     document.getElementById('female').checked = true;
     document.getElementById('lkf_male').checked = true;
     document.getElementById('lkf_female').checked = true;
