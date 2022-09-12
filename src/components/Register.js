@@ -1,35 +1,56 @@
 import React, { useState } from 'react';
-import { fillForm } from '../util';
-import { Accept } from './ImageUpload.js'
-import { ColorPickerGfg } from './ColorPicker.js'
+import { Box, Button, Checkbox, FormGroup, FormControl, FormControlLabel, FormLabel, Grid, InputLabel, MenuItem, Stack, TextField } from '@mui/material';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+
+// import { fillForm } from '../util';
 // import { useNavigate } from 'react-router';
 
 const Register = (props) => {
 
-    const [form, setForm] = useState({
+    const [state, setState] = useState({
         name: '',
-        passwd: '',
         email: '',
-        zip: '',
+        passwd: '',
+        zip: '', 
+        gender: '',
         ias: '',
-        lkf: '',
-        about: '',
-        bk_color: '',
-        jam: ''
-    });
-    //const navigate = useNavigate();
+        lkf: [],
+        about: ''
+    })
 
-    function updateForm(value) {
-        return setForm((prev) => {
-            console.log(form);
-            return { ...prev, ...value };
-        });
+    const handleChange = (evt) => {
+        const value = evt.target.value;
+
+        // checkbox input needs to be modeled as a list
+        if (evt.target.type === 'checkbox') {
+            let valueList = state[evt.target.name];
+            if (evt.target.checked) {
+                valueList.push(value)
+                setState({
+                    ...state, 
+                    [evt.target.name]: valueList
+                })
+            } else {
+                valueList = valueList.filter(e => e !== value)
+                setState({
+                    ...state,
+                    [evt.target.name]: valueList
+                })
+            }
+
+        // standard inputs
+        } else {
+            setState({...state, [evt.target.name]: value});
+        }
+
     }
+
+    //const navigate = useNavigate();
 
     const onSubmit = async (e) => {
         e.preventDefault();
 
-        const newUser = { ...form };
+        const newUser = { ...state };
         
         await fetch("http://localhost:5000/register", {
             method: "POST",
@@ -42,113 +63,150 @@ const Register = (props) => {
             window.alert(err);
             return;
         });
-
-        // setForm({
-        //     name: '',
-        //     passwd: '',
-        //     email: '',
-        //     zip: '',
-        //     ias: '',
-        //     lkf: '',
-        //     about: '',
-        //     bk_color: '',
-        //     jam: ''
-        // });
-        //navigate("/");
+        window.alert(`You have registered ${state.name}!`)
     }
 
-
     return (
-        <div>
+        <Box sx = {{
+            m: 3,
+        }}>
             <h1>Register</h1>
             <form onSubmit={onSubmit}>
-                <fieldset>
-                    <legend>User Info</legend>
-                    <div>
-                        <label htmlFor='name'>First Name</label>
-                        <input autoComplete='off' autoFocus className='' id='name' maxLength='30' name="name" onChange={e => updateForm({ name: e.target.value })} type='text' />
-                    </div>
-                    <div>
-                        <label htmlFor='email'>Email</label>
-                        <input autoComplete="off" className='' id='email' maxLength='320' name="email" onChange={e => updateForm({ email: e.target.value })} type='email' />
-                    </div>
-                    <div>
-                        <label htmlFor='passwd'>Password</label>
-                        <input autoComplete="off" className='' id='passwd' maxLength='5' name="passwd" minLength='5' onChange={e => updateForm({ passwd: e.target.value })} type='password' />
-                    </div>
-                    <div>
-                        <label htmlFor='cnfrm_passwd'>Confirm Password</label>
-                        <input autoComplete="off" className='' id='cnfrm_passwd' maxLength='5' minLength='5' type='password' />
-                    </div>
-
-                    <div>
-                        <label htmlFor='zip'>Zip</label>
-                        <input autoComplete="off" className='' id='zip' name="zip" onChange={e => updateForm({ zip: e.target.value })} pattern='[0-9]{5}' type='text' />
-                    </div>
-                </fieldset>
-
-                <fieldset>
-                    <legend>Gender</legend> 
-                    <div>
-                        <label htmlFor='male'>Male</label>
-                        <input className='' id='male' name='ias' onChange={e => updateForm({ ias: e.target.value })} type='radio' value='male'/>
-                    </div>
-                    <div>
-                        <label htmlFor='female'>Female</label>
-                        <input className='' id='female' name='ias' onChange={e => updateForm({ ias: e.target.value })} type='radio' value='female'/>
-                    </div>
-                    <div>
-                        <label htmlFor='transmale'>Trans-Male</label>
-                        <input className='' id='transmale' name='ias' onChange={e => updateForm({ ias: e.target.value })} type='radio' value='transmale'/>
-                    </div>
-                    <div>
-                        <label htmlFor='transfemale'>Trans-Female</label>
-                        <input className='' id='transfemale' name='ias' onChange={e => updateForm({ ias: e.target.value })} type='radio' value='transfemale'/>
-                    </div>
-                    <div>
-                        <label htmlFor='other'>Other</label>
-                        <input className='' id='other' name='ias' onChange={e => updateForm({ ias: e.target.value })} type='radio' value='other'/>
-                    </div>
-                </fieldset>
-
-                <fieldset>
-                    <legend>Looking For</legend> 
-                    <div>
-                        <label htmlFor='lkf_male'>Male</label>
-                        <input className='' id='lkf_male' name='lkf' onChange={e => updateForm({ lfk: e.target.value })} type='checkbox' value='male'/>
-                    </div>
-                    <div>
-                        <label htmlFor='lkf_female'>Female</label>
-                        <input className='' id='lkf_female' name='lkf' onChange={e => updateForm({ lfk: e.target.value })} type='checkbox' value='female'/>
-                    </div>
-                    <div>
-                        <label htmlFor='lkf_transmale'>Trans-Male</label>
-                        <input className='' id='lkf_transmale' name='lkf' onChange={e => updateForm({ lfk: e.target.value })} type='checkbox' value='transmale'/>
-                    </div>
-                    <div>
-                        <label htmlFor='lkf_transfemale'>Trans-Female</label>
-                        <input className='' id='lkf_transfemale' name='lkf' onChange={e => updateForm({ lfk: e.target.value })} type='checkbox' value='transfemale'/>
-                    </div>
-                    <div>
-                        <label htmlFor='lkf_other'>Other</label>
-                        <input className='' id='lkf_other' name='lkf' onChange={e => updateForm({ lfk: e.target.value })} type='checkbox' value='other'/>
-                    </div>
-                </fieldset>
-
-                <fieldset>
-                    <legend>Profile</legend>
-                    <p>Image<Accept></Accept></p>
-                    <p>bkgcolor<ColorPickerGfg></ColorPickerGfg></p>
-                    <label htmlFor='about'>About Me</label>
-                    <textarea autoComplete='off' id='about' maxLength='25000' name='about' onChange={e => updateForm({ about: e.target.value })}>
-
-                    </textarea>
+                <Stack 
+                    spacing={2}
+                    sx={{
+                        width: 300
+                    }}>
+                    <TextField 
+                        autoFocus={true}
+                        id='name'
+                        label='Name'
+                        maxLength='30'
+                        name='name'
+                        onChange={handleChange}
+                        value={state.name}
+                        variant='outlined'
+                    />
+                    <TextField 
+                        id='email'
+                        label='Email'
+                        maxLength='320'
+                        name='email'
+                        onChange={handleChange}
+                        value={state.email}
+                        type='email'
+                    />
+                    <TextField 
+                        autoComplete='off'
+                        id='passwd'
+                        label='Password'
+                        maxLength={5}
+                        minLength={5}
+                        name='passwd'
+                        onChange={handleChange}
+                        value={state.passwd}
+                        type='password'
+                    />
+                    <TextField 
+                        autoComplete='off'
+                        id='cnfrm_passwd'
+                        label='Confirm Password'
+                        maxLength={5}
+                        minLength={5}
+                        // validation
+                        type='password'
+                    />
+                    <TextField 
+                        autoComplete='off'
+                        id='zip'
+                        label='Zip'
+                        onChange={handleChange}
+                        name='zip'
+                        pattern='[0-9]{5}'
+                        value={state.zip}
+                    />
+                    <TextField
+                        id='gender'
+                        label='Gender'
+                        maxLength={30}
+                        name='gender'
+                        onChange={handleChange}
+                        value={state.gender}
+                    />
+                    <FormControl>
+                        <InputLabel id="iasLabel">Identifying As</InputLabel>
+                        <Select
+                            id='ias'
+                            label='Identifying As'
+                            labelId="iasLabel"
+                            name='ias'
+                            onChange={handleChange}
+                            value={state.ias}
+                        >
+                            <MenuItem value='male'>Male</MenuItem>
+                            <MenuItem value='female'>Female</MenuItem>
+                            <MenuItem value='nonbinary'>Non-Binary</MenuItem>
+                            <MenuItem value='other'>Other</MenuItem>
+                        </Select>
+                    </FormControl>
+                    <FormControl component='fieldset'>
+                        <FormLabel component='legend'>Looking For</FormLabel>
+                        <FormGroup>
+                            <FormControlLabel 
+                                control={
+                                    <Checkbox
+                                        name='lkf' 
+                                        onChange={handleChange}
+                                        value='male' 
+                                    />}
+                                label='Male'
+                            />
+                            <FormControlLabel 
+                                control={
+                                    <Checkbox 
+                                        name='lkf'
+                                        onChange={handleChange}
+                                        value='female' 
+                                    />}
+                                label='Female'
+                            />
+                            <FormControlLabel 
+                                control={
+                                    <Checkbox 
+                                        name='lkf'
+                                        onChange={handleChange}
+                                        value='nonbinary' 
+                                    />}
+                                label='Non-Binary'
+                            />
+                            <FormControlLabel 
+                                control={
+                                    <Checkbox 
+                                        name='lkf'
+                                        onChange={handleChange}
+                                        value='other' 
+                                    />}
+                                label='Other'
+                            />
+                        </FormGroup>
+                    </FormControl>
+                    <TextField
+                        id='about'
+                        label='About Me'
+                        multiline
+                        maxLength='25000'
+                        name='about'
+                        onChange={handleChange}
+                        value={state.about}
+                    />
+                    <p>img uploader</p>
+                    <p>bkgcolor</p>
                     <p>song</p>
-                </fieldset>
-                <button type='submit'>Register</button>
+                    <Button type='submit' variant='contained'>Register</Button>
+                </Stack>
             </form>
-            <button onClick={fillForm}>Fill</button>
-        </div>
+            {/* <button onClick={fillForm}>Fill</button> */}
+        </Box>
     )
 }
 
@@ -166,12 +224,5 @@ export default Register;
 
 • implement client-side validation
 
-commit notes: (DELETE ME)
-added controlled component logic
-added to all inputs the onchange event and value attributes
-changed name='gender' to name='lkf' - need to add a gender text field input
 
-plus readme commit
-
-plus dev server folder commit
 */
