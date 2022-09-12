@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { fillForm } from '../util';
+import { Accept } from './ImageUpload.js'
+import { ColorPickerGfg } from './ColorPicker.js'
 // import { useNavigate } from 'react-router';
 
 const Register = (props) => {
@@ -135,8 +137,8 @@ const Register = (props) => {
 
                 <fieldset>
                     <legend>Profile</legend>
-                    <p>img</p>
-                    <p>bkgcolor</p>
+                    <p>Image<Accept></Accept></p>
+                    <p>bkgcolor<ColorPickerGfg></ColorPickerGfg></p>
                     <label htmlFor='about'>About Me</label>
                     <textarea autoComplete='off' id='about' maxLength='25000' name='about' onChange={e => updateForm({ about: e.target.value })}>
 
