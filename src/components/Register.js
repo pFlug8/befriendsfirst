@@ -87,7 +87,6 @@ const Register = (props) => {
                         name='name'
                         onChange={handleChange}
                         value={state.name}
-                        variant='outlined'
                     />
                     <TextField 
                         id='email'
