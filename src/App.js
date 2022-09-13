@@ -1,12 +1,30 @@
 import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import Box from '@mui/material/Box';
 import Register from './components/Register';
+import { Login } from './components/Login';
+import { Dashboard } from './components/Dashboard';
+import TopBar from './components/TopBar';
+import Landing from './components/Landing';
 
+const isLoggedIn = false;
 
-
-function App() {
+const App = () => {
   
   return (
-    <Register></Register>
+    <div>
+      <TopBar isLoggedIn={isLoggedIn} />
+      <Box sx={{
+
+      }}>
+        <Routes>
+          <Route path='/' element ={<Landing />} />
+          <Route path='/dashboard' element={<Dashboard />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+        </Routes>
+      </Box>
+    </div>
     );
   }
   
@@ -19,11 +37,7 @@ function App() {
   
   - figure out conditional DB config
   
-  - set up MaterialUI
-  
   - profile display action
-  
-  - db connection and commands... how to?
   
   NOTES:
   
@@ -31,7 +45,5 @@ function App() {
   
   fork, git clone, make changes, git add, git commit, git push, pull request
   - all of these have flags that modify behavior
-  
-  - i made some changes to test pulling a remote repo
   
   */ 
