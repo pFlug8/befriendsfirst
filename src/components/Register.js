@@ -1,6 +1,18 @@
 import React, { useState } from 'react';
-import { Box, Button, Checkbox, FormGroup, FormControl, FormControlLabel, FormLabel, InputLabel, MenuItem, Stack, TextField } from '@mui/material';
-import Select, {  } from '@mui/material/Select'; // SelectChangeEvent
+import { 
+    Box, 
+    Button, 
+    Checkbox, 
+    FormGroup, 
+    FormControl, 
+    FormControlLabel, 
+    FormLabel, 
+    Grid, 
+    InputLabel, 
+    MenuItem, 
+    Stack, 
+    TextField } from '@mui/material';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { Accept } from './ImageUpload.js';
 import { ColorPickerGfg } from './ColorPicker.js'
 
@@ -201,8 +213,10 @@ const Register = (props) => {
                         onChange={handleChange}
                         value={state.about}
                     />
-                    <p>Image<Accept></Accept></p>
-                    <p>bkgcolor<ColorPickerGfg></ColorPickerGfg></p>
+                    <p>Image</p>
+                    <Accept></Accept>
+                    <p>BK Color</p>
+                    <ColorPickerGfg></ColorPickerGfg>
                     <p>song</p>
                     <Button type='submit' variant='contained'>Register</Button>
                 </Stack>

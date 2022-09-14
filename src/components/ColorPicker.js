@@ -14,4 +14,4 @@ export function ColorPickerGfg(){
       hideHSV dark />
     </div>
   )
-};
+}
