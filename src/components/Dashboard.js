@@ -1,8 +1,16 @@
+import Box from '@mui/material/Box';
 
 export const Dashboard = () => {
     return (
-        <div>
+        <Box sx={{
+            display: 'flex',
+            flexFlow: 'column nowrap',
+            alignItems: 'center',
+            justifyContent: 'center'
+        }}>
             <h1>I'm a Dashboard!</h1>
-        </div>
+            <p>more stuff</p>
+            <p>In a column</p>
+        </Box>
     )
 }

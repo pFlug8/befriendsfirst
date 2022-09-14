@@ -15,7 +15,7 @@ const App = () => {
     <div>
       <TopBar isLoggedIn={isLoggedIn} />
       <Box sx={{
-
+        
       }}>
         <Routes>
           <Route path='/' element ={<Landing />} />

@@ -11,7 +11,7 @@ export function ColorPickerGfg(){
       height={228} 
       color={color} 
       onChange={setColor} 
-      hideHSV dark />;
+      hideHSV dark />
     </div>
   )
-};
+}

@@ -4,7 +4,7 @@ const theme = createTheme({
     components: {
         MuiTextField: {
             defaultProps: {
-                variant: 'filled',
+                variant: 'outlined',
             }
         }
     }
