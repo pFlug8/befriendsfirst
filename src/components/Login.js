@@ -1,4 +1,12 @@
-import { NavLink } from  "react-router-dom";
+import {
+    Button,
+    Link,
+    Grid,
+    Paper,
+    Stack,
+    TextField,
+    Typography,
+} from '@mui/material';
 
 export const Login = () => {
     const paperStyle={padding :20,height:'70vh',width:280, margin:"20px auto"}
@@ -16,7 +24,7 @@ export const Login = () => {
                 <TextField label='Password' type='password' variant="outlined" fullWidth required/>
                 <Button type='submit' color='primary' variant="contained" style={btnstyle} fullWidth>Sign in</Button>
                 <Typography >
-                    <Link href="/register"> Create an Account</Link>
+                    <Link href="/register/one"> Create an Account</Link>
                 </Typography>
             </Stack>
             </Paper>
