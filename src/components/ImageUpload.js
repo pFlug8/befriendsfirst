@@ -1,7 +1,7 @@
 import React from 'react';
 import {useDropzone} from 'react-dropzone';
 
-export function Accept(props) {
+export function ImageUpload(props) {
   const {
     acceptedFiles,
     fileRejections,
@@ -46,4 +46,4 @@ export function Accept(props) {
   );
 }
 
-<Accept />
+<ImageUpload />
