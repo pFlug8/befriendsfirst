@@ -38,25 +38,53 @@ const ObjectId = require("mongodb").ObjectId;
 
  
 // This section will help you create a new record.
-registerRoutes.route("/register").post(function (req, response) {
- let db_connect = dbo.getDb("befriendsfirst_test"); // <<------- ???
- let myobj = {
-   name: req.body.name,
-   passwd: req.body.passwd,
-   email: req.body.email,
-   zip: req.body.zip,
-   ias: req.body.ias,
-   lkf: req.body.lkf,
-   about: req.body.about,
-   bk_color: req.body.bk_color,
-   jam: req.body.jam,
- };
- db_connect.collection("user_data").insertOne(myobj, function (err, res) {
-   if (err) throw err;
-   response.json(res);
- });
+registerRoutes.post('/create_user', async (req, res, next) => {
+  let db_connect = dbo.getDb("befriendsfirst_test"); // <<------- ???
+  let myobj = {
+    name: req.body.name,
+    passwd: req.body.passwd,
+    verified: false,
+    ias: null,
+    lkf: null,
+    gender: null,
+    zip: null,
+    about: null,
+    //  email: req.body.email,
+    //  zip: req.body.zip,
+    //  ias: req.body.ias,
+    //  lkf: req.body.lkf,
+    //  about: req.body.about,
+    //  bk_color: req.body.bk_color,
+    //  jam: req.body.jam,
+  };
+  const result = await db_connect.collection("user_data").insertOne(myobj);
+  res.json(result);
 });
- 
+
+registerRoutes.post('/update_user', async (req, res, next) => {
+  const db_connect = dbo.getDb("befriendsfirst_test");
+  let userData = {
+    id: req.body.userId,
+    ias: req.body.ias,
+    gender: req.body.gender,
+    lkf: req.body.lkf,
+    zip: req.body.zip,
+    about: req.body.about,
+    bk_color: req.body.bk_color,
+  }
+  console.log(req)
+  const result = await db_connect.collection("user_data").updateOne(
+    { _id: ObjectId(req.body.userId) }, 
+    { $set: { 
+        ias: req.body.ias, 
+        lkf: req.body.lkf,
+        gender: req.body.gender,
+        zip: req.body.zip,
+        about: req.body.about
+      }},
+  );
+  res.json(result);
+})
 
 // // This section will help you update a record by id.
 // registerRoutes.route("/update/:id").post(function (req, response) {
