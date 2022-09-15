@@ -7,17 +7,13 @@ import {
     FormControl, 
     FormControlLabel, 
     FormLabel, 
-    Grid, 
     InputLabel, 
     MenuItem, 
     Stack, 
     TextField } from '@mui/material';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { Accept } from './ImageUpload.js';
+import { ImageUpload } from './ImageUpload.js';
 import { ColorPickerGfg } from './ColorPicker.js'
-
-// import { fillForm } from '../util';
-// import { useNavigate } from 'react-router';
 
 const Register = (props) => {
 
@@ -58,8 +54,6 @@ const Register = (props) => {
         }
 
     }
-
-    //const navigate = useNavigate();
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -214,14 +208,13 @@ const Register = (props) => {
                         value={state.about}
                     />
                     <p>Image</p>
-                    <Accept></Accept>
+                    <ImageUpload />
                     <p>BK Color</p>
                     <ColorPickerGfg></ColorPickerGfg>
                     <p>song</p>
                     <Button type='submit' variant='contained'>Register</Button>
                 </Stack>
             </form>
-            {/* <button onClick={fillForm}>Fill</button> */}
         </Box>
     )
 }

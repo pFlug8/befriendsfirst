@@ -6,7 +6,13 @@ const theme = createTheme({
             defaultProps: {
                 variant: 'outlined',
             }
+        },
+        MuiButton: {
+            defaultProps: {
+                variant: 'outlined',
+            }
         }
+
     }
 })
 

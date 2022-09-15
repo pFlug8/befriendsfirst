@@ -33,7 +33,7 @@ const Landing = () => {
         <div>
             <h1>I'm the first page</h1>
             <Link to='/login'>Login</Link>
-            <Link to='/register'>Register</Link>
+            <Link to='/register/one'>Register</Link>
         </div>
     )
 }
