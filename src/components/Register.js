@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Box, Button, Checkbox, FormGroup, FormControl, FormControlLabel, FormLabel, Grid, InputLabel, MenuItem, Stack, TextField } from '@mui/material';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { Box, Button, Checkbox, FormGroup, FormControl, FormControlLabel, FormLabel, InputLabel, MenuItem, Stack, TextField } from '@mui/material';
+import Select, {  } from '@mui/material/Select'; // SelectChangeEvent
 import { Accept } from './ImageUpload.js';
 import { ColorPickerGfg } from './ColorPicker.js'
 
@@ -69,6 +69,7 @@ const Register = (props) => {
     }
 
     return (
+        
         <Box sx = {{
             m: 3,
         }}>
