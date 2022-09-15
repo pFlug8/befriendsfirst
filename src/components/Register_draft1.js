@@ -11,9 +11,9 @@ import {
     MenuItem, 
     Stack, 
     TextField } from '@mui/material';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
 import { ImageUpload } from './ImageUpload.js';
-import { ColorPickerGfg } from './ColorPicker.js'
+import { ColorPickerGfg } from './ColorPicker.js';
 
 const Register = (props) => {
 

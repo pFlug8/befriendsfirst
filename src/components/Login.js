@@ -9,7 +9,11 @@ import {
 } from '@mui/material';
 
 export const Login = () => {
-    const paperStyle={padding :20,height:'70vh',width:280, margin:"20px auto"}
+    const paperStyle={
+        height:'70vh',
+        margin:"20px auto",
+        padding :20,
+        width:280, }
 
     const btnstyle={margin:'8px 0'}
     return(

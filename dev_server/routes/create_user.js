@@ -63,16 +63,6 @@ registerRoutes.post('/create_user', async (req, res, next) => {
 
 registerRoutes.post('/update_user', async (req, res, next) => {
   const db_connect = dbo.getDb("befriendsfirst_test");
-  let userData = {
-    id: req.body.userId,
-    ias: req.body.ias,
-    gender: req.body.gender,
-    lkf: req.body.lkf,
-    zip: req.body.zip,
-    about: req.body.about,
-    bk_color: req.body.bk_color,
-  }
-  console.log(req)
   const result = await db_connect.collection("user_data").updateOne(
     { _id: ObjectId(req.body.userId) }, 
     { $set: { 

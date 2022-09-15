@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { 
     Button,
@@ -69,7 +69,6 @@ export const RegStepTwo = () => {
             <Stack
                 spacing={2}
                 sx={{
-                    width: 300,
                 }}
             >
                 <FormControl>
@@ -82,7 +81,7 @@ export const RegStepTwo = () => {
                         onChange={handleChange}
                         value={state.ias}
                     >
-                        <MenuItem value='male'>Male</MenuItem>
+                        <MenuItem default value='male'>Male</MenuItem>
                         <MenuItem value='female'>Female</MenuItem>
                         <MenuItem value='nonbinary'>Non-Binary</MenuItem>
                         <MenuItem value='other'>Other</MenuItem>

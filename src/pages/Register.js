@@ -1,16 +1,20 @@
-import { Link, Routes, Route, Outlet } from "react-router-dom";
-import { Box } from '@mui/material';
-import { PageOne } from "../components/RegStepOne";
-import { PageTwo } from "../components/RegStepTwo";
+import { Outlet } from "react-router-dom";
+import { Box, Paper } from '@mui/material';
 
-export const Register_t = (props) => {
+export const Register = (props) => {
 
     return (
         <Box sx={{
 
         }}>
-            <h1>User Registration</h1>
-            <Outlet />
+            <Paper elevation={10} style={{
+                padding: 20,
+                margin: '20px auto',
+                width: 500
+            }}>
+                <h1>User Registration</h1>
+                <Outlet />
+            </Paper>
         </Box>
     )
 }

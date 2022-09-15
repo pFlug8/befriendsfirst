@@ -11,9 +11,7 @@ import { ColorPickerGfg } from "./ColorPicker";
 export const RegStepThree = (props) => {
     const userData = useLocation().state;
 
-    const [state, setState] = useState({ ...userData });
-
-    console.log(state);
+    const [state, setState] = useState({ ...userData }); 
 
     const handleChange = (e) => {
         const value = e.target.value;
@@ -47,7 +45,6 @@ export const RegStepThree = (props) => {
             <Stack
                 spacing={2}
                 sx={{
-                    width: 300,
                 }}
             >
                 <TextField

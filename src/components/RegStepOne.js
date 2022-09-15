@@ -43,7 +43,6 @@ export const RegStepOne = () => {
             <Stack
                 spacing={2}
                 sx={{
-                    width: 300
                 }}>
                 <TextField 
                     autoFocus={true}

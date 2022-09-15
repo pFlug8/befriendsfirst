@@ -7,11 +7,12 @@ export function ColorPickerGfg(){
   return (
     <div>
       <ColorPicker 
-      width={456} 
-      height={228} 
-      color={color} 
-      onChange={setColor} 
-      hideHSV dark />
+        width={456} 
+        height={228} 
+        color={color} 
+        onChange={setColor} 
+        hideHSV
+      />
     </div>
   )
 }
