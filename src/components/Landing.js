@@ -10,7 +10,7 @@ const Landing = () => {
             <Paper elevation={10} style={paperStyle}>
                 <h1>Welcome</h1>
                 <Button type='link' color='primary' variant="contained" style={btnstyle} fullWidth href="/login">Login</Button>
-                <Button type='link' color='primary' variant="contained" style={btnstyle} fullWidth href="/register">Register</Button>
+                <Button type='link' color='primary' variant="contained" style={btnstyle} fullWidth href="/register/one">Register</Button>
             </Paper>
         </Grid>
     )
