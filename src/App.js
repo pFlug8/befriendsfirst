@@ -1,11 +1,15 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import Box from '@mui/material/Box';
-import Register from './components/Register';
 import { Login } from './components/Login';
 import { Dashboard } from './components/Dashboard';
 import TopBar from './components/TopBar';
 import Landing from './components/Landing';
+
+import { Register_t } from './pages/Register'; // < ------------- test delete
+import { RegStepOne } from './components/RegStepOne';
+import { RegStepTwo } from './components/RegStepTwo';
+import { RegStepThree } from './components/RegStepThree';
 
 const isLoggedIn = false;
 
@@ -21,7 +25,11 @@ const App = () => {
           <Route path='/' element ={<Landing />} />
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<Register />} />
+          <Route path='/register' element={<Register_t />}>
+            <Route path='/register/one' element={<RegStepOne />} />
+            <Route path='/register/two' element={<RegStepTwo />} />
+            <Route path='/register/three' element={<RegStepThree />} />
+          </Route> 
         </Routes>
       </Box>
     </div>
