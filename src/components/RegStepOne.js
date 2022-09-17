@@ -3,6 +3,8 @@ import { Navigate } from 'react-router-dom';
 import { Stack } from "@mui/system";
 import { Button, TextField } from "@mui/material";
 
+import { API_URL } from '../config';
+
 export const RegStepOne = () => {
 
     const [state, setState] = useState({
@@ -23,7 +25,7 @@ export const RegStepOne = () => {
 
         const newUser = { ...state };
 
-        await fetch('http://localhost:5000/create_user', {
+        await fetch(`${API_URL}/create_user`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

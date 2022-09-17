@@ -7,6 +7,8 @@ import {
 import { ImageUpload } from "./ImageUpload";
 import { ColorPickerGfg } from "./ColorPicker";
 
+import { API_URL } from "../config";
+
 
 export const RegStepThree = (props) => {
     const userData = useLocation().state;
@@ -24,7 +26,7 @@ export const RegStepThree = (props) => {
         const userData = { ...state };
         console.log(JSON.stringify(userData))
 
-        await fetch("http://localhost:5000/update_user", {
+        await fetch(`${API_URL}/update_user`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
