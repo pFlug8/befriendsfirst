@@ -10,37 +10,14 @@ const dbo = require("../db/conn");
  
 // This help convert the id from string to ObjectId for the _id.
 const ObjectId = require("mongodb").ObjectId;
- 
- 
-// // This section will help you get a list of all the records.
-// registerRoutes.route("/record").get(function (req, res) {
-//  let db_connect = dbo.getDb("befriendsfirst_test");
-//  db_connect
-//    .collection("user_data")
-//    .find({})
-//    .toArray(function (err, result) {
-//      if (err) throw err;
-//      res.json(result);
-//    });
-// });
- 
-// // This section will help you get a single record by id
-// registerRoutes.route("/record/:id").get(function (req, res) {
-//  let db_connect = dbo.getDb();
-//  let myquery = { _id: ObjectId(req.params.id) };
-//  db_connect
-//    .collection("records")
-//    .findOne(myquery, function (err, result) {
-//      if (err) throw err;
-//      res.json(result);
-//    });
-// });
+const sendMail = require("../email.send");
+const templates = require("../email.templates");
 
- 
-// This section will help you create a new record.
+//This section will help you create a new record.
 registerRoutes.post('/create_user', async (req, res, next) => {
-  let db_connect = dbo.getDb("befriendsfirst_test"); // <<------- ???
-  let myobj = {
+  const userEmail = req.body.email;
+  let db_connect = dbo.getDb("befriendsfirst_test");
+  let newUser = {
     name: req.body.name,
     passwd: req.body.passwd,
     verified: false,
@@ -49,22 +26,45 @@ registerRoutes.post('/create_user', async (req, res, next) => {
     gender: null,
     zip: null,
     about: null,
-    //  email: req.body.email,
-    //  zip: req.body.zip,
-    //  ias: req.body.ias,
-    //  lkf: req.body.lkf,
-    //  about: req.body.about,
-    //  bk_color: req.body.bk_color,
-    //  jam: req.body.jam,
+    bk_color: null,
+    jam: null
   };
-  const result = await db_connect.collection("user_data").insertOne(myobj);
-  res.json(result);
+  await db_connect.collection("user_data").insertOne(newUser)
+    .then(response => {
+      // insert failed check here {acknowledged: false} then render error msg
+      const userId = response.insertedId;
+      sendMail(userEmail, templates.confirm(userId));
+      res.json(response) // <--- need to send back message to confirm email and username??
+    })
+    .catch(err => {
+      console.log(err);
+      next(err);
+    });
+
 });
 
-registerRoutes.post('/update_user', async (req, res, next) => {
+registerRoutes.get('/confirm/:id', async (req, res, next) => {
   const db_connect = dbo.getDb("befriendsfirst_test");
+  const id = ObjectId(req.params.id);
+
+  await db_connect.collection("user_data").updateOne(
+    { _id: id },
+    { $set: {
+      verified: true
+      }
+    })
+    .then(response => {
+      res.redirect(301, `http://localhost:3000/register/2/${id}`)
+    })
+    
+})
+
+registerRoutes.post('/update_user/:id', async (req, res, next) => {
+  const db_connect = dbo.getDb("befriendsfirst_test");
+  const id = ObjectId(req.params.id);
+  // should put a findOne check here
   const result = await db_connect.collection("user_data").updateOne(
-    { _id: ObjectId(req.body.userId) }, 
+    { _id: id }, 
     { $set: { 
         ias: req.body.ias, 
         lkf: req.body.lkf,
@@ -73,7 +73,9 @@ registerRoutes.post('/update_user', async (req, res, next) => {
         about: req.body.about
       }},
   );
+  console.log(result);
   res.json(result);
+  // res.redirect(301, `http://localhost:3000/dashboard/${id}`);
 })
 
 // // This section will help you update a record by id.
