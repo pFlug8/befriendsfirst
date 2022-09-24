@@ -28,7 +28,7 @@ export const Login = () => {
                 <TextField label='Password' type='password' variant="outlined" fullWidth required/>
                 <Button type='submit' color='primary' variant="contained" style={btnstyle} fullWidth>Sign in</Button>
                 <Typography >
-                    <Link href="/register/one"> Create an Account</Link>
+                    <Link href="/register/1"> Create an Account</Link>
                 </Typography>
             </Stack>
             </Paper>

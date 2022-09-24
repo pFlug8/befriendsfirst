@@ -23,12 +23,12 @@ const App = () => {
       }}>
         <Routes>
           <Route path='/' element ={<Landing />} />
-          <Route path='/dashboard' element={<Dashboard />} />
+          <Route path='/dashboard/:id' element={<Dashboard />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />}>
-            <Route path='/register/one' element={<RegStepOne />} />
-            <Route path='/register/two' element={<RegStepTwo />} />
-            <Route path='/register/three' element={<RegStepThree />} />
+            <Route path='/register/1' element={<RegStepOne />} />
+            <Route path='/register/2/:id' element={<RegStepTwo />} />
+            <Route path='/register/3' element={<RegStepThree />} />
           </Route> 
         </Routes>
       </Box>

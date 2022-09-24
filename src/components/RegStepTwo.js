@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { 
     Button,
     Checkbox,
@@ -17,12 +17,12 @@ import {
 
 export const RegStepTwo = () => {
 
-    const userId = useLocation().state.userId;
+    const { id } = useParams();
 
     const [navigateNext, setNavigateNext] = useState(false);
 
-    const [state, setState] = useState({
-        userId: userId,
+    const [userData, setUserData] = useState({
+        id: id,
         ias: '',
         gender: '',
         lkf: [],
@@ -34,24 +34,24 @@ export const RegStepTwo = () => {
 
         // checkbox input needs to be modeled as a list
         if (e.target.type === 'checkbox') {
-            let valueList = state[e.target.name];
+            let valueList = userData[e.target.name];
             if (e.target.checked) {
                 valueList.push(value)
-                setState({
-                    ...state, 
+                setUserData({
+                    ...userData, 
                     [e.target.name]: valueList
                 })
             } else {
                 valueList = valueList.filter(elem => elem !== value)
-                setState({
-                    ...state,
+                setUserData({
+                    ...userData,
                     [e.target.name]: valueList
                 })
             }
 
         // standard inputs
         } else {
-            setState({...state, [e.target.name]: value});
+            setUserData({...userData, [e.target.name]: value});
         }
 
     }
@@ -79,7 +79,7 @@ export const RegStepTwo = () => {
                         labelId="iasLabel"
                         name='ias'
                         onChange={handleChange}
-                        value={state.ias}
+                        value={userData.ias}
                     >
                         <MenuItem default value='male'>Male</MenuItem>
                         <MenuItem value='female'>Female</MenuItem>
@@ -93,7 +93,7 @@ export const RegStepTwo = () => {
                     maxLength={30}
                     name='gender'
                     onChange={handleChange}
-                    value={state.gender}
+                    value={userData.gender}
                 />
                 <FormControl component='fieldset'>
                     <FormLabel component='legend'>Looking For</FormLabel>
@@ -143,11 +143,11 @@ export const RegStepTwo = () => {
                     onChange={handleChange}
                     name='zip'
                     pattern='[0-9]{5}'
-                    value={state.zip}
+                    value={userData.zip}
                 />
                 <Button onClick={() => setNavigateNext(true)}>Next</Button>
             </Stack>
-            {navigateNext && <Navigate to='/register/three' state={state} />}
+            {navigateNext && <Navigate to='/register/3' state={userData} />}
         </div>
     )
 }

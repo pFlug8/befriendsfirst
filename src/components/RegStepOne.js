@@ -88,7 +88,7 @@ export const RegStepOne = () => {
                 />
                 <Button type='submit'>Create New User</Button>
             </Stack>
-            {state.userId && <Navigate to='/register/two' state={{ userId: state.userId }}/>}
+            {/* {state.userId && <Navigate to='/register/two' state={{ userId: state.userId }}/>} NEEDS TO RENDER A MSG TO CONFIRM EMAIL */}
         </form>
     )
 }
