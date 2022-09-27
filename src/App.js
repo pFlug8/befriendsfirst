@@ -1,6 +1,7 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import Box from '@mui/material/Box';
+import { DarkMode } from './components/DarkMode'
 import { Login } from './components/Login';
 import { Dashboard } from './components/Dashboard';
 import TopBar from './components/TopBar';
@@ -16,10 +17,10 @@ const isLoggedIn = false;
 const App = () => {
   
   return (
-    <div>
-      <TopBar isLoggedIn={isLoggedIn} />
+    <DarkMode >
+     <TopBar isLoggedIn={isLoggedIn} />
       <Box sx={{
-        
+        bgcolor: 'primary.main',
       }}>
         <Routes>
           <Route path='/' element ={<Landing />} />
@@ -32,7 +33,7 @@ const App = () => {
           </Route> 
         </Routes>
       </Box>
-    </div>
+    </DarkMode>
     );
   }
   
